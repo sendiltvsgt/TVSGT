@@ -1,0 +1,9 @@
+$gutter: 1rem;
+#root {
+    width: 100vw;
+    height: 100vh;
+}
+@import 'node_modules/primeflex/primeflex.scss';
+
+@import 'prismjs/themes/prism-coy.css';
+@import './AppDemo.scss';

@@ -45,26 +45,30 @@ const GeneralList = <T,>(props: GeneralListPropParams) => {
     };
 
     const onFilter = (event: DataTablePFSEvent) => {
-        console.log('Filter');
-        let copiedListDataFilter = { ...listDataFilter };
-        let filterString: JSObjectDto = {};
-        //Page Start and row to display
-        if (event.filters !== undefined) {
-            //let filterString = {};
-            for (let [key, value] of Object.entries(event.filters)) {
-                console.log(value);
-                const searchValue = (value as DataTableFilterMetaData).value;
-                if (searchValue !== null && searchValue !== '') {
-                    filterString['search.' + key] = searchValue;
-                } else {
-                    if (copiedListDataFilter['search.' + key] !== undefined) {
-                        console.log('deleted');
-                        delete copiedListDataFilter['search.' + key];
+        try {
+            console.log('Filter');
+            let copiedListDataFilter = { ...listDataFilter };
+            let filterString: JSObjectDto = {};
+            //Page Start and row to display
+            if (event.filters !== undefined) {
+                //let filterString = {};
+                for (let [key, value] of Object.entries(event.filters)) {
+                    console.log(value);
+                    const searchValue = (value as DataTableFilterMetaData).value;
+                    if (searchValue !== null && searchValue !== '') {
+                        filterString['search.' + key] = searchValue;
+                    } else {
+                        if (copiedListDataFilter['search.' + key] !== undefined) {
+                            console.log('deleted');
+                            delete copiedListDataFilter['search.' + key];
+                        }
                     }
                 }
             }
+            setListDataFilter({ ...copiedListDataFilter, ...filterString });
+        } catch (error) {
+            console.log('Filter', error);
         }
-        setListDataFilter({ ...copiedListDataFilter, ...filterString });
     };
 
     const onSort = (event: DataTablePFSEvent) => {

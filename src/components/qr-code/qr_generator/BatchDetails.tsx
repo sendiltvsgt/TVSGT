@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getApiData } from '../../../../common/DataService';
-import { COUPON_BATCH_VIEW } from '../../../../config/api.config';
-import { IBatchDetails } from '../../../../models/coupon';
+import { getApiData } from '../../../common/DataService';
+import { COUPON_BATCH_VIEW } from '../../../config/api.config';
+import { IBatchDetails } from '../../../models/coupon';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import QRCodeComp from './QRCodeComp';
 import GenerateCoupon from './GenerateCoupon';
 import ViewCoupons from './ViewCoupons';
-import { displayDate } from '../../../../common/utils';
-import { FURL_QR_CODE_GENERATOR } from '../../../../config/route.config';
+import { displayDate } from '../../../common/utils';
+import { FURL_QR_CODE_GENERATOR } from '../../../config/route.config';
 
 const endContent = (
     <React.Fragment>

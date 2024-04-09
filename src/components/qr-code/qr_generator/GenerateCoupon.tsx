@@ -5,9 +5,9 @@ import { classNames } from 'primereact/utils';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import CustomButton from '../../../common/CustomButton';
-import { postApiData } from '../../../../common/DataService';
-import { GENERATE_COUPON } from '../../../../config/api.config';
+import CustomButton from '../../common/CustomButton';
+import { postApiData } from '../../../common/DataService';
+import { GENERATE_COUPON } from '../../../config/api.config';
 
 interface Props {
     batchId: string;

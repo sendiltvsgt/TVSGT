@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Manufacturer } from '../../../../entities/ManufacturerEntity';
-import { ManufacturerDropdownHook, ProductSkuDropdownHook } from '../../../general/GeneralComponents';
+import { Manufacturer } from '../../../entities/ManufacturerEntity';
+import { ManufacturerDropdownHook, ProductSkuDropdownHook } from '../../general/GeneralComponents';
 import * as yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { classNames } from 'primereact/utils';
-import { ProductSku } from '../../../../entities/ProductSkuEntity';
+import { ProductSku } from '../../../entities/ProductSkuEntity';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { Link } from 'react-router-dom';
-import { FURL_QR_CODE_BATCH } from '../../../../config/route.config';
+import { FURL_QR_CODE_BATCH } from '../../../config/route.config';
 import { InputText } from 'primereact/inputtext';
 import { useNavigate } from 'react-router-dom';
-import { postApiData } from '../../../../common/DataService';
-import { COUPAN_CREATE_BATCH } from '../../../../config/api.config';
+import { postApiData } from '../../../common/DataService';
+import { COUPAN_CREATE_BATCH } from '../../../config/api.config';
 import { Dialog } from 'primereact/dialog';
 
 interface NewBatch {

@@ -4,7 +4,7 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import QRCode from 'react-qr-code';
 import { useReactToPrint } from 'react-to-print';
-import CustomButton from '../../../common/CustomButton';
+import CustomButton from '../../common/CustomButton';
 
 interface Action {
     value: string;
@@ -39,7 +39,7 @@ const QRCodeComp = ({ code }: Props) => {
                     const imageData = canvas.toDataURL('image/png');
                     const width = pdf.internal.pageSize.getWidth();
                     const height = pdf.internal.pageSize.getHeight();
-                    pdf.addImage(imageData, 'PNG', 0, 0, width, height);
+                    pdf.addImage(imageData, 'PNG', 0, 0, 85, 55);
                     pdf.save('qr-code.pdf');
                 })
                 .catch((error) => {
@@ -84,11 +84,11 @@ const QRCodeComp = ({ code }: Props) => {
                 />
             </div>
             <div className="" style={{ position: 'absolute', top: '-9999px', left: '-9999px' }}>
-                <div ref={printQRCodeRef} id='print-content' className=" d-flex flex-column " style={{ width: '100vw', height: '100vh' }}>
-                    <div className="pt-2 px-5 flex-grow-1 w-100  ">
+                <div ref={printQRCodeRef} id="print-content" className="p-2 d-flex flex-column ">
+                    <div className=" w-100  flex-grow-1 d-flex justify-content-center  ">
                         <QRCode value={action.value} className="w-100 h-100 " />
                     </div>
-                    <span className=" text-center font-semibold " style={{ fontSize: '4rem' }}>
+                    <span className=" text-center font-semibold " style={{ fontSize: '2rem' }}>
                         {action.value}
                     </span>
                 </div>

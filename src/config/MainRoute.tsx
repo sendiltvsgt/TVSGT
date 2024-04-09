@@ -76,11 +76,10 @@ import UserAdminResetPassword from '../components/user/UserAdminResetPassword';
 import OrderReport from '../components/operation/order/OrderReport';
 import ShipmentReport from '../components/operation/shippment/ShipmentReport';
 import OrderLineItemReport from '../components/operation/order/OrderLineItemReport';
-import Qrcode from '../components/master/qrcode';
-import Newbatch from '../components/master/qrcode/batch/Newbatch';
-import Batch from '../components/master/qrcode/batch/Batch';
-import QRGenerator from '../components/master/qrcode/qr_generator/QRGenerator';
-import BatchDetails from '../components/master/qrcode/qr_generator/BatchDetails';
+import Newbatch from '../components/qr-code/batch/Newbatch';
+import Batch from '../components/qr-code/batch/Batch';
+import QRGenerator from '../components/qr-code/qr_generator/QRGenerator';
+import BatchDetails from '../components/qr-code/qr_generator/BatchDetails';
 
 export const MainRoute = () => {
     return (

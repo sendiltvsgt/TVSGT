@@ -1,4 +1,4 @@
-export const BASE_API_URL = 'http://tvsgt.com:4000';
+export const BASE_API_URL = 'http://3.109.208.14:4000';
 export const STORE_URL = 'http://tvsgt.com';
 
 export const CATEGORY_VIEW_API = '/category/view';

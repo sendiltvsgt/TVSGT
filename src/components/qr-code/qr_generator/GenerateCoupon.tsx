@@ -59,7 +59,9 @@ const GenerateCoupon = (props: Props) => {
                     control={control}
                     render={({ field, fieldState }) => (
                         <div className="mt-4 w-100 d-flex flex-column">
-                            <span className="mb-2 text-xl font-semibold">Coupon count</span>
+                            <span className="mb-2 text-xl font-semibold">
+                                Coupon count <span className="text-danger">*</span>
+                            </span>
                             <span className="p-float-label">
                                 <InputNumber
                                     placeholder="Coupon count"

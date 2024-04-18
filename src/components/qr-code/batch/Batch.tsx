@@ -54,11 +54,21 @@ const Batch = () => {
                     rightToolBarElements={rightToolbarElement}
                     listUrl={COUPAN_BATCH_LIST}
                     render={(datatableProps: DataTableProps) => (
+                        //------Without sortable
+                        // <DataTable {...datatableProps} filters={filters}>
+                        //     <Column header="Batch ID" field="id" sortable filter />
+                        //     <Column header="Product" field="product.name" filter filterElement={(options) => <ProductDropdownListFilter {...options} />} />
+                        //     <Column header="Product SKU ID" field="product.code" filter />
+                        //     <Column header="Manufacturer" field="manufacturer.name" filter filterElement={(options) => <ManufacturerDropdownListFilter {...options} />} />
+                        //     <Column header="Incentive Amount" field="cashback" body={(data) => getRupee(data.cashback)} sortable filter showFilterMatchModes={false} />
+                        //     <Column header="Created Date" field="createdAt" filterField="createdAt" body={(data) => displayDate(data.createdAt)} sortable />
+                        //     {/* <Column header="Action" style={{ minWidth: '15rem' }} body={actionContent} /> */}
+                        // </DataTable>
                         <DataTable {...datatableProps} filters={filters}>
                             <Column header="Batch ID" field="id" sortable filter />
-                            <Column header="Product" field="product.name" filter filterElement={(options) => <ProductDropdownListFilter {...options} />} />
-                            <Column header="Product SKU ID" field="product.code" filter />
-                            <Column header="Manufacturer" field="manufacturer.name" filter filterElement={(options) => <ManufacturerDropdownListFilter {...options} />} />
+                            <Column header="Product" field="product.name" sortable filter filterElement={(options) => <ProductDropdownListFilter {...options} />} />
+                            <Column header="Product SKU ID" field="product.code" sortable filter />
+                            <Column header="Manufacturer" field="manufacturer.name" sortable filter filterElement={(options) => <ManufacturerDropdownListFilter {...options} />} />
                             <Column header="Incentive Amount" field="cashback" body={(data) => getRupee(data.cashback)} sortable filter showFilterMatchModes={false} />
                             <Column header="Created Date" field="createdAt" filterField="createdAt" body={(data) => displayDate(data.createdAt)} sortable />
                             {/* <Column header="Action" style={{ minWidth: '15rem' }} body={actionContent} /> */}

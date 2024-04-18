@@ -93,15 +93,17 @@ const Newbatch = () => {
                 <div className="card w-100 ">
                     <Toolbar left={startContent} right={endContent} />
 
-                    <form className="p-fluid " style={{ paddingTop: '20px' }} onSubmit={handleSubmit(onSumbit)}>
-                        <div className="grid p-fluid">
+                    <form className=" " style={{ paddingTop: '20px' }} onSubmit={handleSubmit(onSumbit)}>
+                        <div className=" pl-4 grid ">
                             <Controller
                                 name="manufacturer"
                                 control={control}
                                 render={({ field, fieldState }) => (
                                     <>
                                         <span className="p-fluid col-4">
-                                            <h5>Manufacturer</h5>
+                                            <h5>
+                                                Manufacturer <span className="text-danger">*</span>
+                                            </h5>
                                             <span className="p-float-label">
                                                 <ManufacturerDropdownHook
                                                     id={field.name}
@@ -129,7 +131,9 @@ const Newbatch = () => {
                                 render={({ field, fieldState }) => (
                                     <>
                                         <span className="p-fluid col-4">
-                                            <h5>Product</h5>
+                                            <h5>
+                                                Product <span className="text-danger">*</span>
+                                            </h5>
                                             <span className="p-float-label">
                                                 <ProductSkuDropdownHook
                                                     id={field.name}
@@ -153,7 +157,9 @@ const Newbatch = () => {
                                 )}
                             />
                             <span className="p-fluid col-4">
-                                <h5>Incentive Amount</h5>
+                                <h5>
+                                    Incentive Amount <span className="text-danger">*</span>
+                                </h5>
                                 <span className="p-float-label">
                                     <InputText placeholder="Name" autoComplete="off" type="text" {...register('cashback', { required: 'name is required' })} />
                                     {errors.cashback && (
@@ -164,8 +170,8 @@ const Newbatch = () => {
                                 </span>
                             </span>
 
-                            <span className="grid p-fluid col-4 col-offset-4">
-                                <Button type="submit" className="mt-6 mb-2 p-button-primary sm" label="Save" />
+                            <span className=" grid p-fluid col-4 col-offset-4 ">
+                                <Button type="submit" className="mt-6 mb-3 p-button-primary sm" label="Save" />
                             </span>
                         </div>
                     </form>

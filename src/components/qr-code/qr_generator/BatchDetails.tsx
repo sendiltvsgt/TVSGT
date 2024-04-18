@@ -51,25 +51,24 @@ const BatchDetails = () => {
             <div className="h-100 col-12 md:col-12">
                 <div className="card">
                     <Toolbar left={startContent} right={endContent} />
-                    <div className="mt-5 d-flex flex-wrap justify-content-around">
-                        <div className="d-flex flex-column" style={{ minWidth: 100 }}>
+                    <div className="mt-5 d-flex  justify-content-around" style={{ overflowX: 'auto', overflowY: 'hidden' }}>
+                        <div className="mx-1  d-flex flex-column" style={{ minWidth: 100 }}>
                             <span className="mb-3 text-xl font-bold">Batch ID</span>
                             <span className="ml-2 text-xl ">{batch?.id}</span>
                         </div>
-                        <div className="d-flex flex-column" style={{ minWidth: 150 }}>
+                        <div className="mx-1  d-flex flex-column" style={{ minWidth: 200 }}>
                             <span className="mb-3 text-xl font-bold">Manufacture</span>
                             <span className="ml-2 text-xl ">{batch?.manufacturer?.name}</span>
                         </div>
-                        <div className="d-flex flex-column" style={{ minWidth: 150 }}>
+                        <div className="mx-1 d-flex flex-column " style={{ minWidth: 250 }}>
                             <span className="mb-3 text-xl font-bold">Product</span>
                             <span className="ml-2 text-xl ">{batch?.product?.name}</span>
                         </div>
-
-                        <div className="d-flex flex-column" style={{ minWidth: 150 }}>
+                        <div className="mx-2  d-flex flex-column" style={{ minWidth: 150 }}>
                             <span className="mb-3 text-xl font-bold bold">Incentive Amount</span>
                             <span className="ml-2 text-xl ">{batch?.cashback}</span>
                         </div>
-                        <div className="d-flex flex-column" style={{ minWidth: 150 }}>
+                        <div className="mx-2  d-flex flex-column" style={{ minWidth: 150 }}>
                             <span className="mb-3 text-xl font-bold bold">Created date</span>
                             <span className="ml-2 text-xl ">{displayDate(new Date(batch?.createdAt))}</span>
                         </div>

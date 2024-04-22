@@ -18,9 +18,8 @@ import { Dialog } from 'primereact/dialog';
 import { InputNumber } from 'primereact/inputnumber';
 
 interface NewBatch {
-    manufacturer: any;
-    product: any;
     cashback: number;
+    product: any;
 }
 const validationschema = yup.object().shape({
     manufacturer: yup.object<Manufacturer>().required('Manufacturer is a required.'),
@@ -65,13 +64,16 @@ const Newbatch = () => {
     });
 
     const onSumbit = async (data: any) => {
-        console.log(data);
-        setIsVisible(true);
-        const response = await postApiData<Partial<NewBatch>>(COUPAN_CREATE_BATCH, data);
-        console.log('data', response.data);
-        setBatchData(response.data);
-        setManufacturer(0);
-        reset();
+        console.log(data,"line68");
+        const response = await postApiData<NewBatch>(COUPAN_CREATE_BATCH, data);
+        console.log('data',response.success);
+        if(response.success === true){
+            setBatchData(response.data);
+            setManufacturer(0);
+            setIsVisible(true);
+            reset();
+        }
+       
     };
 
     const onHide = () => {
@@ -83,6 +85,7 @@ const Newbatch = () => {
     };
 
     useEffect(() => {}, []);
+console.log(batchdata,"line86");
 
     let a;
     if (batchdata?.data) {

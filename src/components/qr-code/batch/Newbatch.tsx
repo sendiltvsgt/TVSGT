@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { postApiData } from '../../../common/DataService';
 import { COUPAN_CREATE_BATCH } from '../../../config/api.config';
 import { Dialog } from 'primereact/dialog';
+import { InputNumber } from 'primereact/inputnumber';
 
 interface NewBatch {
     manufacturer: any;
@@ -24,7 +25,11 @@ interface NewBatch {
 const validationschema = yup.object().shape({
     manufacturer: yup.object<Manufacturer>().required('Manufacturer is a required.'),
     product: yup.object<ProductSku>().required('Product is a required.'),
-    cashback: yup.string().required('Incentive Amount is a required.')
+
+    cashback: yup
+        .string()
+        .required('Incentive Amount is a required')
+        .matches(/^[0-9]+$/, 'Incentive Amount must be number')
 });
 const title = 'Batch';
 
@@ -93,7 +98,7 @@ const Newbatch = () => {
                 <div className="card w-100 ">
                     <Toolbar left={startContent} right={endContent} />
 
-                    <form className=" " style={{ paddingTop: '20px' }} onSubmit={handleSubmit(onSumbit)}>
+                    <form className=" " autoComplete="off" style={{ paddingTop: '20px' }} onSubmit={handleSubmit(onSumbit)}>
                         <div className=" pl-4 grid ">
                             <Controller
                                 name="manufacturer"
@@ -118,6 +123,7 @@ const Newbatch = () => {
                                                         setManufacturer(e.value.id);
                                                     }}
                                                     className={classNames({ 'p-invalid': fieldState.error })}
+                                                    autofocus="autofocus"
                                                 />
                                                 {fieldState.error && <span className="ms-2 text-danger"> {fieldState.error.message}</span>}
                                             </span>
@@ -156,19 +162,36 @@ const Newbatch = () => {
                                     </>
                                 )}
                             />
-                            <span className="p-fluid col-4">
-                                <h5>
-                                    Incentive Amount <span className="text-danger">*</span>
-                                </h5>
-                                <span className="p-float-label">
-                                    <InputText placeholder="Name" autoComplete="off" type="text" {...register('cashback', { required: 'name is required' })} />
-                                    {errors.cashback && (
-                                        <span className="ms-2 text-danger" style={{ color: 'red', fontSize: '16px' }}>
-                                            {errors.cashback.message}
+
+                            <Controller
+                                name="cashback"
+                                control={control}
+                                render={({ field, fieldState }) => (
+                                    <>
+                                        <span className="p-fluid col-4">
+                                            <h5>
+                                                Incentive Amount <span className="text-danger">*</span>
+                                            </h5>
+                                            <span className="p-float-label">
+                                                <InputNumber
+                                                    placeholder="Incentive Amount "
+                                                    id={field.name}
+                                                    inputRef={field.ref}
+                                                    onBlur={field.onBlur}
+                                                    onChange={(e) => {
+                                                        field.onChange(e.value);
+                                                    }}
+                                                    onValueChange={(e) => field.onChange(e)}
+                                                    useGrouping={false}
+                                                    className="w-100"
+                                                    inputClassName={`w-100 ${classNames({ 'p-invalid': fieldState.error })}`}
+                                                />
+                                                {fieldState.error && <span className="ms-2 text-danger"> {fieldState.error.message}</span>}
+                                            </span>
                                         </span>
-                                    )}
-                                </span>
-                            </span>
+                                    </>
+                                )}
+                            />
 
                             <span className=" grid p-fluid col-4 col-offset-4 ">
                                 <Button type="submit" className="mt-6 mb-3 p-button-primary sm" label="Save" />

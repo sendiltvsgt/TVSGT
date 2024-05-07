@@ -21,7 +21,7 @@ interface IGenerateCoupon {
 }
 const schema = yup.object().shape({
     batchId: yup.string(),
-    couponsCount: yup.number().required('Coupon count is a required.')
+    couponsCount: yup.number().required(' No of coupons is required.')
 });
 const GenerateCoupon = (props: Props) => {
     const {
@@ -60,11 +60,11 @@ const GenerateCoupon = (props: Props) => {
                     render={({ field, fieldState }) => (
                         <div className="mt-4 w-100 d-flex flex-column">
                             <span className="mb-2 text-xl font-semibold">
-                                Coupon count <span className="text-danger">*</span>
+                            No. of coupons <span className="text-danger">*</span>
                             </span>
                             <span className="p-float-label">
                                 <InputNumber
-                                    placeholder="Coupon count"
+                                    placeholder="No. of coupons"
                                     id={field.name}
                                     inputRef={field.ref}
                                     value={field.value}

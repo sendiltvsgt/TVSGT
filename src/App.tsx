@@ -75,6 +75,8 @@ const App = (props) => {
     const reduxNavigate = useSelector((state: RootState) => state.navigation);
     useEffect(() => {
         if (reduxNavigate && reduxNavigate.to) {
+            debugger;
+
             store.dispatch(setNavigate({ to: '', from: '' }));
             navigate(reduxNavigate.to);
         }

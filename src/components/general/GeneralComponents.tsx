@@ -370,6 +370,7 @@ export const ManufacturerDropdownHook = (props: {
     onChange: (e: DropdownChangeParams) => void;
     disabled?: boolean;
     focusInputRef?: React.Ref<HTMLInputElement>;
+    autofocus?:any
 }) => {
     const [manufacturerList, setManufacturerList] = useState<Manufacturer[]>([]);
     const loadManufacturer = async () => {
@@ -392,6 +393,7 @@ export const ManufacturerDropdownHook = (props: {
             value={props.value}
             options={manufacturerList}
             onChange={props.onChange}
+            autoFocus= {props.autofocus}
         />
     );
 };

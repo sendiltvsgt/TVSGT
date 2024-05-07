@@ -11,6 +11,7 @@ import GenerateCoupon from './GenerateCoupon';
 import ViewCoupons from './ViewCoupons';
 import { displayDate } from '../../../common/utils';
 import { FURL_QR_CODE_GENERATOR } from '../../../config/route.config';
+import BulkPrint from './BulkPrint';
 
 const endContent = (
     <React.Fragment>
@@ -73,8 +74,9 @@ const BatchDetails = () => {
                             <span className="ml-2 text-xl ">{displayDate(new Date(batch?.createdAt))}</span>
                         </div>
                     </div>
-                    <div className="mt-5 mr-5 d-flex justify-content-end">
-                        <Button style={{ width: '200px' }} type="button" className="p-button-success" label="Generate Coupon" onClick={() => setIsGenCoupon(true)} />
+                    <div className="mt-7 mr-5 d-flex justify-content-end">
+                        <Button style={{ width: '200px' }} type="button" className="p-button-success mr-5" label="Generate Coupon" onClick={() => setIsGenCoupon(true)} />
+                        {id && <BulkPrint batchId={id} reload={couponsRefetch} />}
                     </div>
                     <div className="mt-4">{id && <ViewCoupons reload={couponsRefetch} setShowQrcode={setShowQrcode} batchId={id} setCode={setCode} />}</div>
                 </div>

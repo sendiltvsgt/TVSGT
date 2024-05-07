@@ -16,6 +16,9 @@ import { postApiData } from '../../../common/DataService';
 import { COUPAN_CREATE_BATCH } from '../../../config/api.config';
 import { Dialog } from 'primereact/dialog';
 import { InputNumber } from 'primereact/inputnumber';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { IBatchDetails } from '../../../models/coupon';
 
 interface NewBatch {
     cashback: number;
@@ -24,7 +27,6 @@ interface NewBatch {
 const validationschema = yup.object().shape({
     manufacturer: yup.object<Manufacturer>().required('Manufacturer is a required.'),
     product: yup.object<ProductSku>().required('Product is a required.'),
-
     cashback: yup
         .string()
         .required('Incentive Amount is a required')
@@ -51,29 +53,34 @@ const Newbatch = () => {
 
     const [manufacturer, setManufacturer] = useState<number>(0);
     const [isVisibel, setIsVisible] = useState<boolean>(false);
-    const [batchdata, setBatchData] = useState<any>();
+    const [batchdata, setBatchData] = useState<IBatchDetails>({} as IBatchDetails);
+    const storeLoginUser = useSelector((state: RootState) => state.loginUser.user);
 
     const {
         handleSubmit,
         formState: { errors },
         control,
         reset,
-        register
+        setValue
     } = useForm({
         resolver: yupResolver(validationschema)
     });
 
-    const onSumbit = async (data: any) => {
-        console.log(data,"line68");
-        const response = await postApiData<NewBatch>(COUPAN_CREATE_BATCH, data);
-        console.log('data',response.success);
-        if(response.success === true){
-            setBatchData(response.data);
-            setManufacturer(0);
-            setIsVisible(true);
-            reset();
-        }
-       
+    // const onSumbit = async (data: any) => {
+    //     const response = await postApiData<NewBatch>(COUPAN_CREATE_BATCH, data);
+    //     if (response.success === true) {
+    //         setBatchData(response.data.data);
+    //         setManufacturer(0);
+    //         setIsVisible(true);
+    //         reset();
+    //     }
+    // };
+    const onSubmit = async (data: any) => {
+        const response = await postApiData<{ data: IBatchDetails; success: boolean }>(COUPAN_CREATE_BATCH, data);
+        setBatchData(response.data.data);
+        setManufacturer(0);
+        setIsVisible(true);
+        reset();
     };
 
     const onHide = () => {
@@ -84,24 +91,22 @@ const Newbatch = () => {
         navigate(-1);
     };
 
-    useEffect(() => {}, []);
-console.log(batchdata,"line86");
+    useEffect(() => {
+        debugger;
+        if (storeLoginUser?.manufacturer) {
+            setValue('manufacturer', storeLoginUser.manufacturer);
+            setManufacturer(storeLoginUser.manufacturer.id);
+        }
+        setValue('cashback', '25');
+    }, []);
 
-    let a;
-    if (batchdata?.data) {
-        a = batchdata.data;
-        console.log(a, 'line 91');
-        console.log(a.product.code, 'line 100');
-    } else {
-        console.log('batchdata is undefined or null');
-    }
     return (
         <div className="grid p-fluid">
             <div className="grid p-fluid w-100">
                 <div className="card w-100 ">
                     <Toolbar left={startContent} right={endContent} />
 
-                    <form className=" " autoComplete="off" style={{ paddingTop: '20px' }} onSubmit={handleSubmit(onSumbit)}>
+                    <form className=" " autoComplete="off" style={{ paddingTop: '20px' }} onSubmit={handleSubmit(onSubmit)}>
                         <div className=" pl-4 grid ">
                             <Controller
                                 name="manufacturer"
@@ -120,6 +125,7 @@ console.log(batchdata,"line86");
                                                     optionLabel="label"
                                                     placeholder="Select a Manufacturer"
                                                     // options={Coupons}
+                                                    disabled
                                                     focusInputRef={field.ref}
                                                     onChange={(e) => {
                                                         field.onChange(e.value);
@@ -184,6 +190,8 @@ console.log(batchdata,"line86");
                                                     onChange={(e) => {
                                                         field.onChange(e.value);
                                                     }}
+                                                    value={field.value ? Number(field.value) : 0}
+                                                    disabled
                                                     onValueChange={(e) => field.onChange(e)}
                                                     useGrouping={false}
                                                     className="w-100"
@@ -206,26 +214,26 @@ console.log(batchdata,"line86");
                     <div className="flex flex-column w-full gap-4">
                         <div className="flex  w-full">
                             <div className="w-5">Batch ID</div>
-                            <div className="w-5"> : {batchdata?.data.id} </div>
+                            <div className="w-5"> : {batchdata?.id} </div>
                         </div>
                         <div className="flex  w-full">
                             <div className="w-5">Product Name</div>
-                            <div className="w-7"> : {a?.product.name} </div>
+                            <div className="w-7"> : {batchdata?.product?.name} </div>
                         </div>
 
                         <div className="flex w-full">
                             <div className="w-5">Product Code </div>
-                            <div className="w-5"> : {a?.product.code}</div>
+                            <div className="w-5"> : {batchdata?.product?.code}</div>
                         </div>
 
                         <div className="flex w-full">
-                            <div className="w-5">Insentive Amount</div>
-                            <div className="w-5"> : {batchdata?.data.cashback}</div>
+                            <div className="w-5">Scan Incentive Amount</div>
+                            <div className="w-5"> : {batchdata?.cashback}</div>
                         </div>
 
                         <div className="flex w-full">
                             <div className="w-5"> Batch Code</div>
-                            <div className="w-5"> : {batchdata?.data.batchCode} </div>
+                            <div className="w-5"> : {batchdata?.batchCode} </div>
                         </div>
                     </div>
                     <div style={{ display: 'grid', placeItems: 'center' }}>

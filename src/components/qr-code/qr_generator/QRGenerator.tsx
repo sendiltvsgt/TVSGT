@@ -86,9 +86,9 @@ const QRGenerator = (props: { status?: OrderStatus[]; isDialog?: boolean }) => {
                             <Column header="Product" field="product.name" sortable filter showFilterMatchModes={false} filterElement={(options) => <ProductDropdownListFilter {...options} />} />
                             <Column header="Product SKU ID" field="product.code" sortable filter showFilterMatchModes={false} />
                             <Column header="Manufacturer" field="manufacturer.name" sortable filter showFilterMatchModes={false} filterElement={(options) => <ManufacturerDropdownListFilter {...options} />} />
-                            <Column header="Sale Amount" field="product.price" filterField="product.price" body={(data) => getRupee(data.product.price)} sortable filter />
+                            <Column header=" Net Sale Value" field="product.price" filterField="product.price" body={(data) => getRupee(data.product.price)} sortable filter />
                             <Column header="Incentive Amount" field="cashback" filterField="cashback" body={(data) => getRupee(data.cashback)} sortable filter />
-                            <Column header=" Incentive per Master Carton" field="product.boxContents" filterField="product.boxContents" sortable filter />
+                            <Column header=" Pieces per master carton" field="product.boxContents" filterField="product.boxContents" sortable filter />
                             <Column header="Created Date" field="createdAt" body={(data) => displayDate(data.createdAt)} sortable />
                             <Column header="Action" style={{ minWidth: '5rem' }} body={actionContent} />
                         </DataTable>

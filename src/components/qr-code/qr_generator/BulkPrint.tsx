@@ -47,8 +47,7 @@ const BulkPrint = (props: Props) => {
         try {
             // const res1 = await axios.get(`${BASE_API_URL}${VIEW_GENERATE_COUPONS(props.batchId)}?search.status=GENERATED`, { headers: getGeneralHeaders() });
             // console.log('COUPONS', res1.data);
-
-            const res = await getApiData<ICoupons[]>(`${VIEW_GENERATE_COUPONS(props.batchId)}?search.status=GENERATED`);
+            const res = await getApiData<ICoupons[]>(`${VIEW_GENERATE_COUPONS(props.batchId)}?search.status=GENERATED&page.start=0&page.count=500`);
             if (res.data.length) {
                 setQrCodes(res.data);
                 console.log('COUPONS', res);

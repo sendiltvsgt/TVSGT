@@ -71,12 +71,16 @@ const BulkPrint = (props: Props) => {
                 <div ref={componentRefs} id="print-content" className=" w-100 h-100 ">
                     {qrCodes.map((obj, ind) => (
                         <div key={ind} className="  w-100 h-100 d-flex flex-column justify-content-center align-items-center  ">
-                            <div className=" py-2 px-5    w-100 h-75 d-flex justify-content-center  ">
-                                <QRCode value={obj.couponCode} className=" w-100 h-100 " />
+                            <div style={{ height: '22%' }}></div>
+                            <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '60%' }}>
+                                <div className=" py-2 px-5    w-100 h-75 d-flex justify-content-center  ">
+                                    <QRCode value={obj.couponCode} className="p-4 w-100 h-100 " style={{ border: '10px solid #160b55', borderRadius: 15 }} fgColor="#160b55" />
+                                </div>
+                                <span className="mt-2 text-center  text-dark  font-semibold " style={{ fontSize: '5vw' }}>
+                                    {obj.couponCode}
+                                </span>
                             </div>
-                            <span className="mx-auto text-center font-semibold " style={{ fontSize: '8vw' }}>
-                                {obj.couponCode}
-                            </span>
+                            <div style={{ height: '18%' }}></div>
                         </div>
                     ))}
                 </div>

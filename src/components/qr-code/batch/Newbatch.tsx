@@ -210,7 +210,10 @@ const Newbatch = () => {
                         </div>
                     </form>
                 </div>
-                <Dialog header="Batch Details" visible={isVisibel} onHide={onHide} modal className="w-5">
+                <Dialog header="Batch Details" showHeader={false} visible={isVisibel} onHide={onHide} modal className="w-5">
+                    <div className="my-5 ">
+                        <span className="text-xl text-secondary font-semibold ">Batch Details</span>
+                    </div>
                     <div className="flex flex-column w-full gap-4">
                         <div className="flex  w-full">
                             <div className="w-5">Batch ID</div>

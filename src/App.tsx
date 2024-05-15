@@ -69,7 +69,23 @@ const App = (props) => {
             setRole(storeLoginUser.userType);
         }
     }, [storeLoginUser]);
+    useEffect(() => {
+        const confirmExit = (e) => {
+            // Cancel the event
+            e.preventDefault();
+            // Chrome requires returnValue to be set
+            e.returnValue = 'Do you want to close';
+            // Prompt the user before leaving
+            return '';
+        };
+        // Add event listener when component mounts
+        window.addEventListener('beforeunload', confirmExit);
 
+        // Remove event listener when component unmounts
+        return () => {
+            window.removeEventListener('beforeunload', confirmExit);
+        };
+    }, []);
     //Navigate from redux state
     const navigate = useNavigate();
     const reduxNavigate = useSelector((state: RootState) => state.navigation);

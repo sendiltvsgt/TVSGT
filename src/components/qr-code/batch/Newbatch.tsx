@@ -92,7 +92,6 @@ const Newbatch = () => {
     };
 
     useEffect(() => {
-        debugger;
         if (storeLoginUser?.manufacturer) {
             setValue('manufacturer', storeLoginUser.manufacturer);
             setManufacturer(storeLoginUser.manufacturer.id);

@@ -57,12 +57,16 @@ const App = (props) => {
         if (!storeLoginUser || !storeLoginUser.id) {
             //call login status api
             (async () => {
-                let result = await getApiData<LoginStatusResponseDto>(USER_LOGIN_STATUS);
-                if (result.data.success) {
-                    store.dispatch(setUser(result.data.data.user));
-                } else {
-                    store.dispatch(setNavigate({ to: '/logout', from: '' }));
-                    return;
+                try {
+                    let result = await getApiData<LoginStatusResponseDto>(USER_LOGIN_STATUS);
+                    if (result.data.success) {
+                        store.dispatch(setUser(result.data.data.user));
+                    } else {
+                        store.dispatch(setNavigate({ to: '/logout', from: '' }));
+                        return;
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
             })();
         } else {
@@ -91,8 +95,6 @@ const App = (props) => {
     const reduxNavigate = useSelector((state: RootState) => state.navigation);
     useEffect(() => {
         if (reduxNavigate && reduxNavigate.to) {
-            debugger;
-
             store.dispatch(setNavigate({ to: '', from: '' }));
             navigate(reduxNavigate.to);
         }

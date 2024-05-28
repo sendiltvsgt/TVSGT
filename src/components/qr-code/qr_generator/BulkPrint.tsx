@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getApiData } from '../../../common/DataService';
 import { VIEW_GENERATE_COUPONS } from '../../../config/api.config';
-import { ICoupons } from '../../../models/coupon';
+import { ICoupon } from '../../../models/coupon';
 import QRCode from 'react-qr-code';
 import { Button } from 'primereact/button';
 import { useReactToPrint } from 'react-to-print';
 import { store } from '../../../redux/store';
 import { setToast } from '../../../redux/toast.slice';
+import { QRCodeCanvas } from 'qrcode.react';
 
 interface Props {
     batchId: string;
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const BulkPrint = (props: Props) => {
-    const [qrCodes, setQrCodes] = useState<ICoupons[]>([]);
+    const [qrCodes, setQrCodes] = useState<ICoupon[]>([]);
     const [isWarning, setIsWarning] = useState<boolean>(false);
     const componentRefs = useRef<HTMLDivElement>(null);
 
@@ -47,7 +48,7 @@ const BulkPrint = (props: Props) => {
         try {
             // const res1 = await axios.get(`${BASE_API_URL}${VIEW_GENERATE_COUPONS(props.batchId)}?search.status=GENERATED`, { headers: getGeneralHeaders() });
             // console.log('COUPONS', res1.data);
-            const res = await getApiData<ICoupons[]>(`${VIEW_GENERATE_COUPONS(props.batchId)}?search.status=GENERATED&page.start=0&page.count=500`);
+            const res = await getApiData<ICoupon[]>(`${VIEW_GENERATE_COUPONS(props.batchId)}?search.status=GENERATED&page.start=0&page.count=500`);
             if (res.data.length) {
                 setQrCodes(res.data);
                 console.log('COUPONS', res);
@@ -71,13 +72,20 @@ const BulkPrint = (props: Props) => {
                 <div ref={componentRefs} id="print-content" className=" w-100 h-100 ">
                     {qrCodes.map((obj, ind) => (
                         <div key={ind} className="  w-100 h-100 d-flex flex-column justify-content-center align-items-center  ">
-                            <div className="bg-danger" style={{ height: '23.5%' }}></div>
-                            <div className="d-flex justify-content-center " style={{ height: '53%', width: '81.8%' }}>
-                                <QRCode value={obj.couponCode} className="h-100 w-100 " fgColor="#160b55" />
+                            <div className=" d-flex align-items-end" style={{ height: '23.5%', width: '81.8%' }}>
+                                <span className="mb-1 mr-2  w-100 d-flex justify-content-end  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 100)' }}>
+                                    Batch ID : {obj.couponBatch.id}
+                                </span>
                             </div>
-                            <div className="d-flex justify-content-center align-items-start " style={{ height: '23.5%' }}>
-                                <span className=" mt-2 text-center  text-dark  font-semibold " style={{ fontSize: '5vw' }}>
+                            <div className="d-flex justify-content-center     " style={{ height: '53%', width: '81.8%' }}>
+                                <QRCodeCanvas value={obj.couponCode} className="w-100 h-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
+                            </div>
+                            <div className=" flex-column justify-content-start  " style={{ height: '23.5%', width: '81.8%' }}>
+                                <span className=" mt-2 text-center  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 50)' }}>
                                     {obj.couponCode}
+                                </span>
+                                <span className="mt-1 w-100 d-flex justify-content-start text-wrap text-dark  font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 100)' }}>
+                                    Product Details : {obj.couponBatch.product.name}
                                 </span>
                             </div>
                         </div>

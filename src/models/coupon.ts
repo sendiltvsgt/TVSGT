@@ -85,7 +85,7 @@ export interface Category {
     longDescription: string;
     parentCategory: Category;
 }
-export interface ICoupons {
+export interface ICoupon {
     id: number;
     createdAt: string;
     updatedAt: string;

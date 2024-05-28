@@ -8,13 +8,13 @@ import { ManufacturerDropdownListFilter } from '../../general/GeneralComponents'
 import GeneralList from '../../general/GeneralList';
 import { RenderRestriction } from '../../general/Restriction';
 import { VIEW_GENERATE_COUPONS } from '../../../config/api.config';
-import { ICoupons } from '../../../models/coupon';
+import { ICoupon } from '../../../models/coupon';
 import { FilterMatchMode } from 'primereact/api';
 interface Props {
     batchId: string;
     reload: boolean;
     setShowQrcode: React.Dispatch<React.SetStateAction<boolean>>;
-    setCode: React.Dispatch<React.SetStateAction<string>>;
+    setCode: React.Dispatch<React.SetStateAction<ICoupon>>;
 }
 const ViewCoupons = (props: Props) => {
     const [filters] = useState<DataTableFilterMeta>({
@@ -25,14 +25,14 @@ const ViewCoupons = (props: Props) => {
         'couponBatch.product.name': { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         'couponBatch.product.code': { value: null, matchMode: FilterMatchMode.STARTS_WITH }
     });
-    const handleCoupon = (couponCode: string) => {
-        props.setCode(couponCode);
+    const handleCoupon = (coupon: ICoupon) => {
+        props.setCode(coupon);
         props.setShowQrcode(true);
     };
     return (
         <div className="w-100 h-100">
             <RenderRestriction allowedRoles={[UserRole.ADMIN, UserRole.MANUFACTURER]}>
-                <GeneralList<ICoupons>
+                <GeneralList<ICoupon>
                     title={'Coupons'}
                     reload={props.reload}
                     // apiFilterParams={apiFilterParams}
@@ -44,7 +44,7 @@ const ViewCoupons = (props: Props) => {
                                 header="Coupon No"
                                 field="couponCode"
                                 body={(data) => (
-                                    <span className="hyperlink" onClick={() => handleCoupon(data.couponCode)}>
+                                    <span className="hyperlink" onClick={() => handleCoupon(data)}>
                                         {data.couponCode}
                                     </span>
                                 )}

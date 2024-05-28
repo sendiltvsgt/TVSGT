@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getApiData } from '../../../common/DataService';
 import { COUPON_BATCH_VIEW } from '../../../config/api.config';
-import { IBatchDetails } from '../../../models/coupon';
+import { IBatchDetails, ICoupon } from '../../../models/coupon';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -26,8 +26,7 @@ const BatchDetails = () => {
     const [showQrcode, setShowQrcode] = useState<boolean>(false);
     const [isGenCoupon, setIsGenCoupon] = useState<boolean>(false);
     const [couponsRefetch, setCouponsRefetch] = useState<boolean>(false);
-
-    const [code, setCode] = useState<string>('');
+    const [coupon, setCoupon] = useState<ICoupon>({} as ICoupon);
     useEffect(() => {
         intialLoad();
     }, []);
@@ -35,7 +34,6 @@ const BatchDetails = () => {
         if (id) {
             const res = await getApiData<IBatchDetails>(COUPON_BATCH_VIEW(id));
             setBatch(res.data);
-            console.log('coupon', res);
         }
     };
 
@@ -78,7 +76,7 @@ const BatchDetails = () => {
                         <Button style={{ width: '200px' }} type="button" className="p-button-success mr-5" label="Generate Coupon" onClick={() => setIsGenCoupon(true)} />
                         {id && <BulkPrint batchId={id} reload={couponsRefetch} />}
                     </div>
-                    <div className="mt-4">{id && <ViewCoupons reload={couponsRefetch} setShowQrcode={setShowQrcode} batchId={id} setCode={setCode} />}</div>
+                    <div className="mt-4">{id && <ViewCoupons reload={couponsRefetch} setShowQrcode={setShowQrcode} batchId={id} setCode={setCoupon} />}</div>
                 </div>
             </div>
             <Dialog
@@ -96,10 +94,10 @@ const BatchDetails = () => {
                 modal
                 // header={headerElement}
                 // footer={footerContent}
-                style={{ width: '50vw' }}
+                style={{ width: '50vw', height: '80vh' }}
                 onHide={() => setShowQrcode(false)}
             >
-                <QRCodeComp code={code} />
+                <QRCodeComp coupon={coupon} />
             </Dialog>
         </div>
     );

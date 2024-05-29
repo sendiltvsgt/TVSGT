@@ -56,15 +56,15 @@ const QRCodeComp = ({ coupon }: Props) => {
             <div className="flex-grow-1 w-100 ">
                 <div ref={qrCodeRef} className=" w-100 h-100 d-flex flex-column">
                     <div className="py-2 px-5  flex-grow-1 w-100 d-flex flex-column justify-content-center align-items-center">
-                        <span className=" mb-1 pr-2 d-flex justify-content-end text-dark text-base font-semibold " style={{ width: `calc((100vh + 100vw) / 8)`, minWidth: 200 }}>
+                        <span className=" pr-2 d-flex justify-content-end text-dark text-base font-semibold " style={{ width: `calc((100vh + 100vw) / 7)`, minWidth: 200 }}>
                             Batch ID : {coupon.couponBatch.id}
                         </span>
-                        <div className=" flex-grow-1 d-flex justify-content-center align-items-center " style={{ minWidth: 200, height: `calc((100vh + 100vw) / 8)`, width: `calc((100vh + 100vw) / 8)` }}>
-                            <QRCodeCanvas value={coupon.couponCode} className="h-100 w-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
+                        <div className=" flex-grow-1 d-flex justify-content-center align-items-center " style={{ minWidth: 200, height: `calc((100vh + 100vw) / 7)`, width: `calc((100vh + 100vw) / 7)` }}>
+                            <QRCodeSVG value={coupon.couponCode} className="h-100 w-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
                         </div>
 
-                        <span className=" mt- text-center text-dark text-2xl font-semibold ">{coupon.couponCode}</span>
-                        <span className="mt-1 ps-1 text-wrap text-start text-dark text-base font-semibold " style={{ width: `calc((100vh + 100vw) / 8)`, minWidth: 200 }}>
+                        <span className=" mt-1 text-center text-dark text-2xl font-semibold ">{coupon.couponCode}</span>
+                        <span className="mt-1 ps-1 text-wrap text-start text-dark text-base font-semibold " style={{ width: `calc((100vh + 100vw) / 7)`, minWidth: 200 }}>
                             Product Details : {coupon.couponBatch.product.name}
                         </span>
                     </div>
@@ -97,18 +97,18 @@ const QRCodeComp = ({ coupon }: Props) => {
             <div className="" style={{ position: 'absolute', top: '-9999px', left: '-9999px' }}>
                 <div ref={printQRCodeRef} id="print-content" className=" d-flex flex-column w-100 h-100 justify-content-center align-items-center">
                     <div className=" d-flex align-items-end" style={{ height: '23.5%', width: '81.8%' }}>
-                        <span className="mb-1 mr-2  w-100 d-flex justify-content-end  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 100)' }}>
+                        <span className="mb-1 mr-2  w-100 d-flex justify-content-end  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 90)' }}>
                             Batch ID : {coupon.couponBatch.id}
                         </span>
                     </div>
                     <div className="d-flex justify-content-center     " style={{ height: '53%', width: '81.8%' }}>
-                        <QRCodeCanvas value={coupon.couponCode} className="w-100 h-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
+                        <QRCodeSVG value={coupon.couponCode} className="w-100 h-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
                     </div>
                     <div className=" flex-column justify-content-start  " style={{ height: '23.5%', width: '81.8%' }}>
                         <span className=" mt-2 text-center  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 50)' }}>
                             {coupon.couponCode}
                         </span>
-                        <span className="mt-1 w-100 d-flex justify-content-start text-wrap text-dark  font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 100)' }}>
+                        <span className="mt-1 w-100 d-flex justify-content-start text-wrap text-dark  font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 90)' }}>
                             Product Details : {coupon.couponBatch.product.name}
                         </span>
                     </div>

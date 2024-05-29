@@ -7,7 +7,7 @@ import { Button } from 'primereact/button';
 import { useReactToPrint } from 'react-to-print';
 import { store } from '../../../redux/store';
 import { setToast } from '../../../redux/toast.slice';
-import { QRCodeCanvas } from 'qrcode.react';
+import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react';
 
 interface Props {
     batchId: string;
@@ -78,7 +78,7 @@ const BulkPrint = (props: Props) => {
                                 </span>
                             </div>
                             <div className="d-flex justify-content-center     " style={{ height: '53%', width: '81.8%' }}>
-                                <QRCodeCanvas value={obj.couponCode} className="w-100 h-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
+                                <QRCodeSVG value={obj.couponCode} className="w-100 h-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
                             </div>
                             <div className=" flex-column justify-content-start  " style={{ height: '23.5%', width: '81.8%' }}>
                                 <span className=" mt-2 text-center  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 50)' }}>

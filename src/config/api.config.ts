@@ -1,6 +1,7 @@
-export const BASE_API_URL = 'https://tvsgt.com/api/';
-export const BASE_API_URL1 = 'https://uat.tvsgt.com/api';
+export const BASE_API_URL1 = 'https://tvsgt.com/api/';
+export const BASE_API_URL = 'https://uat.tvsgt.com/api';
 export const STORE_URL = 'http://tvsgt.com';
+
 
 export const CATEGORY_VIEW_API = '/category/view';
 export const CATEGORY_LIST_API = '/category/list';

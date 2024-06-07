@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 import { USER_EDIT_API, USER_VIEW_API } from '../../config/api.config';
 import { User } from '../../entities/UserEntity';
-import { getApiData, putApiData } from '../../common/DataService';
+import { getApiData, postApiData, putApiData } from '../../common/DataService';
 import { ToggleButton } from 'primereact/togglebutton';
  
 
@@ -32,7 +32,7 @@ const UserEdit = () => {
         onSubmit: (data) => {
             (async () => {
                 if (user && user.id){
-                    await putApiData<Partial<User>>(USER_EDIT_API, user.id, data);
+                    await postApiData<Partial<User>>(USER_EDIT_API+'/'+user.id,data);
                     navigate(-1);
                 }
             }
@@ -64,12 +64,12 @@ const UserEdit = () => {
 
                         <h5>First Name</h5>
                         <span className="p-float-label">
-                            <InputText required placeholder="First Name" name='firstname' type="text" value={formik.values.firstName} onChange={formik.handleChange} />
+                            <InputText required placeholder="First Name" name='firstName' type="text" value={formik.values.firstName} onChange={formik.handleChange} />
                         </span>
 
                         <h5>Username</h5>
                         <span className="p-float-label">
-                            <InputText required placeholder="Last Name" name='lastname' type="text" value={formik.values.lastName} onChange={formik.handleChange} />
+                            <InputText required placeholder="Last Name" name='lastName' type="text" value={formik.values.lastName} onChange={formik.handleChange} />
                         </span>
 
                         <h5>Email</h5>

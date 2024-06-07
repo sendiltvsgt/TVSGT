@@ -29,7 +29,7 @@ import { VehicleModel } from '../../entities/VehicleModelEntity';
 import { Dialog } from 'primereact/dialog';
 import { VehicleBrand } from '../../entities/VehicleBrandEntity';
 
-export const ManufacturerDropdown = (props: { name: string; value?: any; onChange: (e: DropdownChangeParams) => void; disabled?: boolean }) => {
+export const ManufacturerDropdown = (props: { name: string; value?: any; onChange: (e: DropdownChangeParams) => void; disabled?: boolean; id?:any;placeholder?: any; focusInputRef?: any; optionLabel:any }) => {
     const [manufacturerList, setManufacturerList] = useState<Manufacturer[]>([]);
     const loadManufacturer = async () => {
         const result = await getApiData<Manufacturer[]>(MANUFACTURER_LIST_API);
@@ -73,7 +73,7 @@ export const VehicleModelDropdownMultiSelect = (props: { name: string; value?: a
     return <MultiSelect name={props.name} value={props.value} filter options={vehicleModelList} onChange={props.onChange} />;
 };
 
-export const CategoryDropdown = (props: { name: string; value?: any; onChange: (e: DropdownChangeParams) => void }) => {
+export const CategoryDropdown = (props: { name: string; value?: any; focusInputRef: any; placeholder: any; optionLabel: any; id: any; onChange: (e: DropdownChangeParams) => void }) => {
     const [categoryList, setCategoryList] = useState<Category[]>([]);
     const loadCategory = () => {
         (async () => {
@@ -89,7 +89,7 @@ export const CategoryDropdown = (props: { name: string; value?: any; onChange: (
     return <Dropdown name={props.name} value={props.value} filter options={categoryList} onChange={props.onChange} />;
 };
 
-export const StockistDropdown = (props: { name: string; value?: any; onChange: (e: DropdownChangeParams) => void; disabled?: boolean }) => {
+export const StockistDropdown = (props: { name: string; value?: any; onChange: (e: DropdownChangeParams) => void; disabled?: boolean; id?:any;  focusInputRef?: any; placeholder?: any; optionLabel?: any; }) => {
     const [stockistList, setStockistList] = useState<Stockist[]>([]);
     const loadStockist = () => {
         (async () => {

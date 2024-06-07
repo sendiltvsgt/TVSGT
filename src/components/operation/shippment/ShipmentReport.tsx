@@ -27,10 +27,10 @@ const ShipmentReport = () => {
         onSubmit: (data) => {
             (async () => {
                 const postData = {
-                    "search.status": data.status.value,
-                    "search.deliveryPartner.id": data.deliveryPartner.id,
-                    "search.createdAtFrom": format(data.createdAtRange[0],"yyyy-MM-dd HH:mm:ss"),
-                    "search.createdAtTo": format(endOfDay(data.createdAtRange[1]),"yyyy-MM-dd HH:mm:ss"),
+                    "status": data.status.value,
+                    "deliveryPartner.id": data.deliveryPartner.id,
+                    "createdAtFrom": format(data.createdAtRange[0],"yyyy-MM-dd HH:mm:ss"),
+                    "createdAtTo": format(endOfDay(data.createdAtRange[1]),"yyyy-MM-dd HH:mm:ss"),
                 }
                 await getApiDataDownload(SHIPMENT_REPORT, postData);
             }

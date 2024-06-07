@@ -73,18 +73,18 @@ const BulkPrint = (props: Props) => {
                     {qrCodes.map((obj, ind) => (
                         <div key={ind} className="  w-100 h-100 d-flex flex-column justify-content-center align-items-center  ">
                             <div className=" d-flex align-items-end" style={{ height: '23.5%', width: '81.8%' }}>
-                                <span className="mb-1 mr-2  w-100 d-flex justify-content-end  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 100)' }}>
+                                <span className="mb-1 mr-2  w-100 d-flex justify-content-end  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 76)' }}>
                                     Batch ID : {obj.couponBatch.id}
                                 </span>
                             </div>
                             <div className="d-flex justify-content-center     " style={{ height: '53%', width: '81.8%' }}>
-                                <QRCodeSVG value={obj.couponCode} className="w-100 h-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
+                                <QRCode value={obj.couponCode} className="w-100 h-100" style={{ objectFit: 'fill' }} fgColor="#160b55" />
                             </div>
                             <div className=" flex-column justify-content-start  " style={{ height: '23.5%', width: '81.8%' }}>
                                 <span className=" mt-2 text-center  text-dark font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 50)' }}>
                                     {obj.couponCode}
                                 </span>
-                                <span className="mt-1 w-100 d-flex justify-content-start text-wrap text-dark  font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 100)' }}>
+                                <span className="mt-1 w-100 d-flex justify-content-start text-wrap text-dark  font-semibold " style={{ fontSize: 'calc((100vh + 100vw) / 76)' }}>
                                     Product Details : {obj.couponBatch.product.name}
                                 </span>
                             </div>
